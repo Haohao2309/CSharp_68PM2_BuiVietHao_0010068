@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace WindowsFormsApp01
 {
-    public partial class qllh : Form
+    public partial class UCQLSV : UserControl
     {
-        public qllh()
+        public UCQLSV()
         {
             InitializeComponent();
         }
@@ -22,7 +22,7 @@ namespace WindowsFormsApp01
 
         }
 
-        private void groupBox1_Enter(object sender, EventArgs e)
+        private void grbQLSV_Enter(object sender, EventArgs e)
         {
 
         }
