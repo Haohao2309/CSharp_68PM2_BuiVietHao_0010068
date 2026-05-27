@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="qlsv" Class="DataClasses1DataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="AppSettings" ConnectionString="Data Source=DESKTOP-LDKON1G\SQLEXPRESS;Initial Catalog=qlsv;Integrated Security=True;Trust Server Certificate=True" SettingsObjectName="WindowsFormsApp01.Properties.Settings" SettingsPropertyName="qlsvConnectionString" Provider="System.Data.SqlClient" />
+  <Table Name="dbo.tbl_lophoc" Member="tbl_lophocs">
+    <Type Name="tbl_lophoc">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="malop" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="tenlop" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="soluong" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="tbl_lophoc_tbl_hocsinh" Member="tbl_hocsinhs" ThisKey="id" OtherKey="malop" Type="tbl_hocsinh" />
+    </Type>
+  </Table>
+  <Table Name="dbo.tbl_hocsinh" Member="tbl_hocsinhs">
+    <Type Name="tbl_hocsinh">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="masv" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="hovaten" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="gioitinh" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="ngaysinh" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="malop" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="tbl_lophoc_tbl_hocsinh" Member="tbl_lophoc" ThisKey="malop" OtherKey="id" Type="tbl_lophoc" IsForeignKey="true" />
+    </Type>
+  </Table>
+</Database>
