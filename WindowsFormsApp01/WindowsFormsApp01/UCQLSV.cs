@@ -31,6 +31,7 @@ namespace WindowsFormsApp01
 
         private void UCQLSV_Load(object sender, EventArgs e)
         {
+            dataGridView1.ReadOnly = true;
             displayStudentList();
             displayClassList4CBX();
         }
@@ -104,6 +105,7 @@ namespace WindowsFormsApp01
             if (e.RowIndex >= 0)
             {
                 DataGridViewRow row = dataGridView1.Rows[e.RowIndex];
+                textBox1.Enabled = false;
                 textBox1.Text = row.Cells["masv"].Value?.ToString();
                 textBox2.Text = row.Cells["hovaten"].Value?.ToString();
 
@@ -123,6 +125,11 @@ namespace WindowsFormsApp01
                     comboBox2.SelectedValue = row.Cells["malop"].Value;
                 }
             }
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+        
         }
     }
 }
