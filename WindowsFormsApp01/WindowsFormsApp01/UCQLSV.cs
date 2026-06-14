@@ -105,6 +105,48 @@ namespace WindowsFormsApp01
             }
         }
 
+        public void deleteStudent()
+        {
+            try
+            {
+                string masv = textBox1.Text;
+
+                if (string.IsNullOrEmpty(masv))
+                {
+                    MessageBox.Show("Vui long chon mot sinh vien de xoa!", "Thong bao", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+                DialogResult dialogResult = MessageBox.Show(
+                    $"Ban co chac chan muon xoa sinh vien co ma '{masv}' khong?",
+                    "Xac nhan xoa",
+                    MessageBoxButtons.YesNo,
+                    MessageBoxIcon.Question);
+                if (dialogResult == DialogResult.Yes)
+                {
+                    tbl_hocsinh hs = dataClasses1.tbl_hocsinhs.FirstOrDefault(x => x.masv == masv);
+                    if (hs != null)
+                    {
+                        dataClasses1.tbl_hocsinhs.DeleteOnSubmit(hs);
+                        dataClasses1.SubmitChanges();
+                        displayStudentList();
+
+                        textBox1.Text = "";
+                        textBox2.Text = "";
+                        textBox1.Enabled = true;
+                        MessageBox.Show("Xoa sinh vien thanh cong!", "Thong bao", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+                    else
+                    {
+                        MessageBox.Show("Khong tim thay sinh vien co ma: " + masv, "Loi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Khong the xoa sinh vien nay! Chi tiet loi: " + ex.Message, "Loi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
         public void displayStudentList()
         {
             List<tbl_hocsinh> dSSV = dataClasses1.tbl_hocsinhs.ToList();
@@ -164,6 +206,11 @@ namespace WindowsFormsApp01
         private void button2_Click(object sender, EventArgs e)
         {
             updateStudent();
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            deleteStudent();
         }
     }
 }
