@@ -64,7 +64,17 @@ namespace WindowsFormsApp01
                     return; 
                 }
                 string hoTen = textBox2.Text;
+                if (string.IsNullOrEmpty(hoTen))
+                {
+                    MessageBox.Show("Can nhap ten sinh vien!", "Canh bao", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
                 string gioiTinh = comboBox1.Text;
+                if (string.IsNullOrEmpty(gioiTinh))
+                {
+                    MessageBox.Show("Can chon gioi tinh sinh vien!", "Canh bao", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
                 string dateTime = dateTimePicker1.Text;
                 int maLop = Convert.ToInt32(comboBox2.SelectedValue);
                 if (gioiTinh == "Nu") gt = false;

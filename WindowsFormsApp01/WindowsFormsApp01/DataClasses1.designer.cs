@@ -30,12 +30,12 @@ namespace WindowsFormsApp01
 		
     #region Extensibility Method Definitions
     partial void OnCreated();
-    partial void Inserttbl_lophoc(tbl_lophoc instance);
-    partial void Updatetbl_lophoc(tbl_lophoc instance);
-    partial void Deletetbl_lophoc(tbl_lophoc instance);
     partial void Inserttbl_hocsinh(tbl_hocsinh instance);
     partial void Updatetbl_hocsinh(tbl_hocsinh instance);
     partial void Deletetbl_hocsinh(tbl_hocsinh instance);
+    partial void Inserttbl_lophoc(tbl_lophoc instance);
+    partial void Updatetbl_lophoc(tbl_lophoc instance);
+    partial void Deletetbl_lophoc(tbl_lophoc instance);
     #endregion
 		
 		public DataClasses1DataContext() : 
@@ -68,14 +68,6 @@ namespace WindowsFormsApp01
 			OnCreated();
 		}
 		
-		public System.Data.Linq.Table<tbl_lophoc> tbl_lophocs
-		{
-			get
-			{
-				return this.GetTable<tbl_lophoc>();
-			}
-		}
-		
 		public System.Data.Linq.Table<tbl_hocsinh> tbl_hocsinhs
 		{
 			get
@@ -83,167 +75,13 @@ namespace WindowsFormsApp01
 				return this.GetTable<tbl_hocsinh>();
 			}
 		}
-	}
-	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.tbl_lophoc")]
-	public partial class tbl_lophoc : INotifyPropertyChanging, INotifyPropertyChanged
-	{
 		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private int _id;
-		
-		private string _malop;
-		
-		private string _tenlop;
-		
-		private System.Nullable<int> _soluong;
-		
-		private EntitySet<tbl_hocsinh> _tbl_hocsinhs;
-		
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnidChanging(int value);
-    partial void OnidChanged();
-    partial void OnmalopChanging(string value);
-    partial void OnmalopChanged();
-    partial void OntenlopChanging(string value);
-    partial void OntenlopChanged();
-    partial void OnsoluongChanging(System.Nullable<int> value);
-    partial void OnsoluongChanged();
-    #endregion
-		
-		public tbl_lophoc()
-		{
-			this._tbl_hocsinhs = new EntitySet<tbl_hocsinh>(new Action<tbl_hocsinh>(this.attach_tbl_hocsinhs), new Action<tbl_hocsinh>(this.detach_tbl_hocsinhs));
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id", DbType="Int NOT NULL", IsPrimaryKey=true)]
-		public int id
+		public System.Data.Linq.Table<tbl_lophoc> tbl_lophocs
 		{
 			get
 			{
-				return this._id;
+				return this.GetTable<tbl_lophoc>();
 			}
-			set
-			{
-				if ((this._id != value))
-				{
-					this.OnidChanging(value);
-					this.SendPropertyChanging();
-					this._id = value;
-					this.SendPropertyChanged("id");
-					this.OnidChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_malop", DbType="VarChar(20)")]
-		public string malop
-		{
-			get
-			{
-				return this._malop;
-			}
-			set
-			{
-				if ((this._malop != value))
-				{
-					this.OnmalopChanging(value);
-					this.SendPropertyChanging();
-					this._malop = value;
-					this.SendPropertyChanged("malop");
-					this.OnmalopChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_tenlop", DbType="VarChar(20)")]
-		public string tenlop
-		{
-			get
-			{
-				return this._tenlop;
-			}
-			set
-			{
-				if ((this._tenlop != value))
-				{
-					this.OntenlopChanging(value);
-					this.SendPropertyChanging();
-					this._tenlop = value;
-					this.SendPropertyChanged("tenlop");
-					this.OntenlopChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_soluong", DbType="Int")]
-		public System.Nullable<int> soluong
-		{
-			get
-			{
-				return this._soluong;
-			}
-			set
-			{
-				if ((this._soluong != value))
-				{
-					this.OnsoluongChanging(value);
-					this.SendPropertyChanging();
-					this._soluong = value;
-					this.SendPropertyChanged("soluong");
-					this.OnsoluongChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="tbl_lophoc_tbl_hocsinh", Storage="_tbl_hocsinhs", ThisKey="id", OtherKey="malop")]
-		public EntitySet<tbl_hocsinh> tbl_hocsinhs
-		{
-			get
-			{
-				return this._tbl_hocsinhs;
-			}
-			set
-			{
-				this._tbl_hocsinhs.Assign(value);
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
-		}
-		
-		private void attach_tbl_hocsinhs(tbl_hocsinh entity)
-		{
-			this.SendPropertyChanging();
-			entity.tbl_lophoc = this;
-		}
-		
-		private void detach_tbl_hocsinhs(tbl_hocsinh entity)
-		{
-			this.SendPropertyChanging();
-			entity.tbl_lophoc = null;
 		}
 	}
 	
@@ -467,6 +305,168 @@ namespace WindowsFormsApp01
 			{
 				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
 			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.tbl_lophoc")]
+	public partial class tbl_lophoc : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _id;
+		
+		private string _malop;
+		
+		private string _tenlop;
+		
+		private string _ghichu;
+		
+		private EntitySet<tbl_hocsinh> _tbl_hocsinhs;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnidChanging(int value);
+    partial void OnidChanged();
+    partial void OnmalopChanging(string value);
+    partial void OnmalopChanged();
+    partial void OntenlopChanging(string value);
+    partial void OntenlopChanged();
+    partial void OnghichuChanging(string value);
+    partial void OnghichuChanged();
+    #endregion
+		
+		public tbl_lophoc()
+		{
+			this._tbl_hocsinhs = new EntitySet<tbl_hocsinh>(new Action<tbl_hocsinh>(this.attach_tbl_hocsinhs), new Action<tbl_hocsinh>(this.detach_tbl_hocsinhs));
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id", DbType="Int NOT NULL", IsPrimaryKey=true)]
+		public int id
+		{
+			get
+			{
+				return this._id;
+			}
+			set
+			{
+				if ((this._id != value))
+				{
+					this.OnidChanging(value);
+					this.SendPropertyChanging();
+					this._id = value;
+					this.SendPropertyChanged("id");
+					this.OnidChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_malop", DbType="VarChar(20)")]
+		public string malop
+		{
+			get
+			{
+				return this._malop;
+			}
+			set
+			{
+				if ((this._malop != value))
+				{
+					this.OnmalopChanging(value);
+					this.SendPropertyChanging();
+					this._malop = value;
+					this.SendPropertyChanged("malop");
+					this.OnmalopChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_tenlop", DbType="VarChar(20)")]
+		public string tenlop
+		{
+			get
+			{
+				return this._tenlop;
+			}
+			set
+			{
+				if ((this._tenlop != value))
+				{
+					this.OntenlopChanging(value);
+					this.SendPropertyChanging();
+					this._tenlop = value;
+					this.SendPropertyChanged("tenlop");
+					this.OntenlopChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ghichu", DbType="VarChar(50)")]
+		public string ghichu
+		{
+			get
+			{
+				return this._ghichu;
+			}
+			set
+			{
+				if ((this._ghichu != value))
+				{
+					this.OnghichuChanging(value);
+					this.SendPropertyChanging();
+					this._ghichu = value;
+					this.SendPropertyChanged("ghichu");
+					this.OnghichuChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="tbl_lophoc_tbl_hocsinh", Storage="_tbl_hocsinhs", ThisKey="id", OtherKey="malop")]
+		public EntitySet<tbl_hocsinh> tbl_hocsinhs
+		{
+			get
+			{
+				return this._tbl_hocsinhs;
+			}
+			set
+			{
+				this._tbl_hocsinhs.Assign(value);
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+		
+		private void attach_tbl_hocsinhs(tbl_hocsinh entity)
+		{
+			this.SendPropertyChanging();
+			entity.tbl_lophoc = this;
+		}
+		
+		private void detach_tbl_hocsinhs(tbl_hocsinh entity)
+		{
+			this.SendPropertyChanging();
+			entity.tbl_lophoc = null;
 		}
 	}
 }
