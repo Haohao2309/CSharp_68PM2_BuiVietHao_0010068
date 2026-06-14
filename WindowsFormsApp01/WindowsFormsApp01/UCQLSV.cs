@@ -51,6 +51,18 @@ namespace WindowsFormsApp01
             {
                 bool gt = true;
                 string masv = textBox1.Text;
+                if (string.IsNullOrEmpty(masv))
+                {
+                    int counter = dataClasses1.tbl_hocsinhs.Count() + 1;
+                    masv = "SV" + counter;
+                    textBox1.Text = masv;
+                }
+                bool checkTonTai = dataClasses1.tbl_hocsinhs.Any(x => x.masv == masv);
+                if (checkTonTai)
+                {
+                    MessageBox.Show("Ma sinh vien da ton tai!", "Canh bao", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return; 
+                }
                 string hoTen = textBox2.Text;
                 string gioiTinh = comboBox1.Text;
                 string dateTime = dateTimePicker1.Text;
@@ -66,7 +78,7 @@ namespace WindowsFormsApp01
 
                 dataClasses1.tbl_hocsinhs.InsertOnSubmit(hs);
                 dataClasses1.SubmitChanges();
-                dataGridView1.DataSource = dataClasses1.tbl_hocsinhs.ToList();
+                displayStudentList();
                 MessageBox.Show("Them sinh vien thanh cong!", "Thong bao", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             catch (Exception ex)
@@ -271,6 +283,21 @@ namespace WindowsFormsApp01
         private void button8_Click(object sender, EventArgs e)
         {
             LoadData(totalPages, currentKeyword);
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            textBox2.Text = "Bui Viet Hao";
+            dateTimePicker1.Value = DateTime.Now;
+            if (comboBox1.Items.Count > 0)
+            {
+                comboBox1.SelectedIndex = 0;
+            }
+            if (comboBox2.Items.Count > 0)
+            {
+                comboBox2.SelectedIndex = 0;
+            }
+            textBox1.Enabled = true;
         }
     }
 }
