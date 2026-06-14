@@ -14,6 +14,11 @@ namespace WindowsFormsApp01
     {
 
         DataClasses1DataContext dataClasses1 = new DataClasses1DataContext();
+        private int currentPage = 1;     
+        private int pageSize = 5;        
+        private int totalPages = 1;      
+        private int totalRecords = 0;    
+        private string currentKeyword = ""; 
         public UCQLSV()
         {
             InitializeComponent();
@@ -147,10 +152,33 @@ namespace WindowsFormsApp01
             }
         }
 
+        private void LoadData(int page, string keyword)
+        {
+            var query = dataClasses1.tbl_hocsinhs.AsQueryable();
+            if (!string.IsNullOrEmpty(keyword))
+            {
+                query = query.Where(x => x.hovaten.Contains(keyword) ||x.masv.Contains(keyword) ||x.malop.ToString() == keyword);
+            }
+            totalRecords = query.Count();
+            totalPages = (int)Math.Ceiling((double)totalRecords / pageSize);
+            if (totalPages == 0) totalPages = 1;
+            if (page < 1) page = 1;
+            if (page > totalPages) page = totalPages;
+            currentPage = page;
+            var data = query.Skip((currentPage - 1) * pageSize).Take(pageSize).ToList();
+            dataGridView1.DataSource = data;
+            label8.Text = $"Trang {currentPage}/{totalPages} | {totalRecords} ban ghi";
+            button6.Enabled = (currentPage > 1);          
+            button7.Enabled = (currentPage > 1);         
+            button9.Enabled = (currentPage < totalPages);  
+            button8.Enabled = (currentPage < totalPages);  
+        }
+
         public void displayStudentList()
         {
-            List<tbl_hocsinh> dSSV = dataClasses1.tbl_hocsinhs.ToList();
-            dataGridView1.DataSource = dSSV;
+            currentKeyword = "";
+            textBox3.Text = "";
+            LoadData(1, currentKeyword);
         }
 
 
@@ -211,6 +239,38 @@ namespace WindowsFormsApp01
         private void button3_Click(object sender, EventArgs e)
         {
             deleteStudent();
+        }
+
+        private void button7_Click(object sender, EventArgs e)
+        {
+            if (currentPage > 1)
+            {
+                LoadData(currentPage - 1, currentKeyword);
+            }
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            currentKeyword = textBox3.Text.Trim();
+            LoadData(1, currentKeyword);
+        }
+
+        private void button6_Click(object sender, EventArgs e)
+        {
+            LoadData(1, currentKeyword);
+        }
+
+        private void button9_Click(object sender, EventArgs e)
+        {
+            if (currentPage < totalPages)
+            {
+                LoadData(currentPage + 1, currentKeyword);
+            }
+        }
+
+        private void button8_Click(object sender, EventArgs e)
+        {
+            LoadData(totalPages, currentKeyword);
         }
     }
 }
