@@ -93,5 +93,36 @@ namespace WindowsFormsApp01
         {
 
         }
+
+        private void dataGridView1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex >= 0)
+            {
+                DataGridViewRow row = dataGridView1.Rows[e.RowIndex];
+                textBox1.Text = row.Cells["masv"].Value?.ToString();
+                textBox2.Text = row.Cells["hovaten"].Value?.ToString();
+
+                if (row.Cells["ngaysinh"].Value != null)
+                {
+                    dateTimePicker1.Value = Convert.ToDateTime(row.Cells["ngaysinh"].Value);
+                }
+
+                if (row.Cells["gioitinh"].Value != null)
+                {
+                    bool gioiTinh = Convert.ToBoolean(row.Cells["gioitinh"].Value);
+                    comboBox1.Text = gioiTinh ? "Nam" : "Nu";
+                }
+
+                if (row.Cells["malop"].Value != null)
+                {
+                    comboBox2.SelectedValue = row.Cells["malop"].Value;
+                }
+            }
+        }
     }
 }
