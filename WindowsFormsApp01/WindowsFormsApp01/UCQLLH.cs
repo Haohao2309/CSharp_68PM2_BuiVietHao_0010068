@@ -307,7 +307,16 @@ namespace WindowsFormsApp01
 
         private void button10_Click(object sender, EventArgs e)
         {
-            
+            string idStr = textBox1.Text;
+            if (string.IsNullOrEmpty(idStr))
+            {
+                MessageBox.Show("Vui long chon lop hoc de xem danh sach sinh vien!", "Thong bao", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            int id = int.Parse(idStr);
+            frm_student_in_class frm = new frm_student_in_class(id);
+            frm.ShowDialog();
         }
     }
 }
