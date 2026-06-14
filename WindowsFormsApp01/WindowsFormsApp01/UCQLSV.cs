@@ -71,6 +71,40 @@ namespace WindowsFormsApp01
         }
 
 
+        public void updateStudent()
+        {
+            try
+            {
+                string masv = textBox1.Text;
+                if (string.IsNullOrEmpty(masv))
+                {
+                    MessageBox.Show("Vui long chon sinh vien de sua!", "Thong bao", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+                tbl_hocsinh hs = dataClasses1.tbl_hocsinhs.SingleOrDefault(x => x.masv == masv);
+
+                if (hs != null)
+                {
+                    hs.hovaten = textBox2.Text;
+                    hs.ngaysinh = dateTimePicker1.Value;
+                    hs.gioitinh = (comboBox1.Text == "Nam") ? true : false;
+                    hs.malop = Convert.ToInt32(comboBox2.SelectedValue);
+                    dataClasses1.SubmitChanges();
+                    displayStudentList();
+
+                    MessageBox.Show("Cap nhat thanh cong!", "Thong bao", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+                else
+                {
+                    MessageBox.Show("Khong tim thay sinh vien!: " + masv, "Loi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Co loi xay ra: " + ex.Message, "Loi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
         public void displayStudentList()
         {
             List<tbl_hocsinh> dSSV = dataClasses1.tbl_hocsinhs.ToList();
@@ -129,7 +163,7 @@ namespace WindowsFormsApp01
 
         private void button2_Click(object sender, EventArgs e)
         {
-        
+            updateStudent();
         }
     }
 }
